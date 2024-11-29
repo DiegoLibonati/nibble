@@ -1,4 +1,9 @@
-import { ItemMenuProps } from "../entities/entities";
+interface ItemMenuProps {
+  title: string;
+  price: number;
+  img: string;
+  desc: string;
+}
 
 export const ItemMenu = ({
   title,

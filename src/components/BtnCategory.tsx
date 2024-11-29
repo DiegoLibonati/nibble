@@ -1,11 +1,18 @@
-import { BtnCategoryProps } from "../entities/entities";
+interface BtnCategoryProps {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  category: string;
+}
 
 export const BtnCategory = ({
-  event_func,
+  onClick,
   category,
 }: BtnCategoryProps): JSX.Element => {
   return (
-    <button onClick={event_func} type="button">
+    <button
+      onClick={onClick}
+      type="button"
+      aria-label={`${category} button`}
+    >
       {category}
     </button>
   );

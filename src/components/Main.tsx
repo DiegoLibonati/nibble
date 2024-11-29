@@ -1,39 +1,27 @@
-import { BtnCategory } from "./BtnCategory";
-import { menu } from "../helpers/data";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+import { Food } from "../entities/entities";
+
 import { ItemMenu } from "./ItemMenu";
-import { Menu } from "../entities/entities";
+import { BtnCategory } from "./BtnCategory";
+
+import { getCategories } from "../helpers/getCategories";
+import { menu } from "../constants/data";
 
 export const Main = (): JSX.Element => {
-  const [allCategories, setCategories] = useState<Menu[]>(menu);
+  const [foods, setFoods] = useState<Food[]>(menu);
 
-  const handleCategoryAll: React.MouseEventHandler<HTMLButtonElement> = () => {
-    setCategories(menu);
+  const handleSetFoodByCategory = (category: string): void => {
+    if (category === "all") return setFoods(menu);
+
+    const newMenu = menu.filter((food) => food.category === category);
+
+    setFoods(newMenu);
   };
 
-  const handleCategoryBreakfast: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    const breakfastArray = menu.filter((x) => x.category === "breakfast");
-
-    setCategories(breakfastArray);
-  };
-
-  const handleCategoryLunch: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    const breakfastArray = menu.filter((x) => x.category === "lunch");
-
-    setCategories(breakfastArray);
-  };
-
-  const handleCategoryShakes: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {
-    const breakfastArray = menu.filter((x) => x.category === "shakes");
-
-    setCategories(breakfastArray);
-  };
+  const categories = useMemo(() => {
+    return getCategories(menu);
+  }, []);
 
   return (
     <main className="main_container">
@@ -47,27 +35,32 @@ export const Main = (): JSX.Element => {
       <section className="btns_container">
         <article className="btns_container_center">
           <BtnCategory
-            category="All"
-            event_func={handleCategoryAll}
+            category={"all"}
+            onClick={() => handleSetFoodByCategory("all")}
           ></BtnCategory>
-          <BtnCategory
-            category="Breakfast"
-            event_func={handleCategoryBreakfast}
-          ></BtnCategory>
-          <BtnCategory
-            category="Lunch"
-            event_func={handleCategoryLunch}
-          ></BtnCategory>
-          <BtnCategory
-            category="Shakes"
-            event_func={handleCategoryShakes}
-          ></BtnCategory>
+          {categories.map((category: string) => {
+            return (
+              <BtnCategory
+                key={category}
+                category={category}
+                onClick={() => handleSetFoodByCategory(category)}
+              ></BtnCategory>
+            );
+          })}
         </article>
       </section>
 
       <section className="items_container">
-        {allCategories.map((category) => {
-          return <ItemMenu key={category.id} {...category}></ItemMenu>;
+        {foods.map((food) => {
+          return (
+            <ItemMenu
+              key={food.id}
+              title={food.title}
+              desc={food.desc}
+              img={food.img}
+              price={food.price}
+            ></ItemMenu>
+          );
         })}
       </section>
     </main>

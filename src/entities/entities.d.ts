@@ -1,5 +1,5 @@
 // ##### TYPES #####
-export type Menu = {
+export type Food = {
   id: number;
   title: string;
   category: string;
@@ -7,16 +7,3 @@ export type Menu = {
   img: string;
   desc: string;
 };
-
-// ##### INTERFACES #####
-export interface BtnCategoryProps {
-  event_func: React.MouseEventHandler<HTMLButtonElement>;
-  category: string;
-}
-
-export interface ItemMenuProps {
-  title: string;
-  price: number;
-  img: string;
-  desc: string;
-}

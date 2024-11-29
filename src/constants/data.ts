@@ -1,6 +1,6 @@
-import { Menu } from "../entities/entities";
+import { Food } from "../entities/entities";
 
-export const menu: Menu[] = [
+export const menu: Food[] = [
   {
     id: 1,
     title: "buttermilk pancakes",
