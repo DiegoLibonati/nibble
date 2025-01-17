@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react";
 
 import { ItemMenu } from "./ItemMenu";
 
-import { MENU_MOCK } from "../tests/constants/constants";
+import { mockMenu } from "../tests/jest.constants";
 
 type RenderComponent = {
   props: {
@@ -15,7 +15,7 @@ type RenderComponent = {
 };
 
 const renderComponent = (): RenderComponent => {
-  const FOOD = MENU_MOCK[0];
+  const FOOD = mockMenu[0];
 
   const props = {
     title: FOOD.title,
@@ -39,20 +39,30 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the root of the ItemMenu, the image, the title, the price and the description of the food.", () => {
-  const { props } = renderComponent();
+jest.mock("../constants/data.ts", () => ({
+  get menu() {
+    return mockMenu;
+  },
+}));
 
-  const article = screen.getByRole("article");
-  const img = screen.getByRole("img");
-  const title = screen.getByRole("heading", { name: props.title });
-  const price = screen.getByText(`$${props.price}`);
-  const description = screen.getByText(props.desc);
+describe("ItemMenu.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the root of the ItemMenu, the image, the title, the price and the description of the food.", () => {
+      const { props } = renderComponent();
 
-  expect(article).toBeInTheDocument();
-  expect(img).toBeInTheDocument();
-  expect(img).toHaveAttribute("src", props.img);
-  expect(img).toHaveAttribute("alt", props.title);
-  expect(title).toBeInTheDocument();
-  expect(price).toBeInTheDocument();
-  expect(description).toBeInTheDocument();
+      const article = screen.getByRole("article");
+      const img = screen.getByRole("img");
+      const title = screen.getByRole("heading", { name: props.title });
+      const price = screen.getByText(`$${props.price}`);
+      const description = screen.getByText(props.desc);
+
+      expect(article).toBeInTheDocument();
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", props.img);
+      expect(img).toHaveAttribute("alt", props.title);
+      expect(title).toBeInTheDocument();
+      expect(price).toBeInTheDocument();
+      expect(description).toBeInTheDocument();
+    });
+  });
 });

@@ -12,16 +12,16 @@ export const ItemMenu = ({
   desc,
 }: ItemMenuProps): JSX.Element => {
   return (
-    <article className="item_container">
+    <article className="item">
       <img src={img} alt={title}></img>
 
-      <div className="item_container_descripcion">
-        <div className="item_container_descripcion_header">
+      <div className="item__description">
+        <div className="item__description__header">
           <h2>{title}</h2>
           <p>${price}</p>
         </div>
 
-        <p className="item_desc">{desc}</p>
+        <p className="item__text">{desc}</p>
       </div>
     </article>
   );

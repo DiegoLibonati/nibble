@@ -5,7 +5,7 @@ import { Main } from "./Main";
 
 import { getCategories } from "../helpers/getCategories";
 
-import { MENU_MOCK } from "../tests/constants/constants";
+import { mockMenu } from "../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -19,72 +19,84 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the title of the APP, also the button there, the button of all the possible categories based on the menu to be rendered and the general foods.", () => {
-  renderComponent();
+jest.mock("../constants/data.ts", () => ({
+  get menu() {
+    return mockMenu;
+  },
+}));
 
-  const titleApp = screen.getByRole("heading", { name: /our menu/i });
-  const btnAll = screen.getByRole("button", { name: /all button/i });
+describe("Main.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the title of the APP, also the button there, the button of all the possible categories based on the menu to be rendered and the general foods.", () => {
+      renderComponent();
 
-  expect(titleApp).toBeInTheDocument();
-  expect(btnAll).toBeInTheDocument();
+      const titleApp = screen.getByRole("heading", { name: /our menu/i });
+      const btnAll = screen.getByRole("button", { name: /all button/i });
 
-  const categories = getCategories(MENU_MOCK);
+      expect(titleApp).toBeInTheDocument();
+      expect(btnAll).toBeInTheDocument();
 
-  for (let category of categories) {
-    const btnCategory = screen.getByRole("button", {
-      name: `${category} button`,
+      const categories = getCategories(mockMenu);
+
+      for (let category of categories) {
+        const btnCategory = screen.getByRole("button", {
+          name: `${category} button`,
+        });
+
+        expect(btnCategory).toBeInTheDocument();
+      }
+
+      const articles = screen.getAllByRole("article");
+      const foodItems = articles.filter((article) =>
+        article.classList.contains("item")
+      );
+
+      expect(foodItems).toHaveLength(mockMenu.length);
     });
 
-    expect(btnCategory).toBeInTheDocument();
-  }
+    test("It should render meals from a specific category when the selected category is clicked.", async () => {
+      renderComponent();
 
-  const articles = screen.getAllByRole("article");
-  const foodItems = articles.filter((article) =>
-    article.classList.contains("item_container")
-  );
+      const categories = getCategories(mockMenu);
+      const category = categories[0];
 
-  expect(foodItems).toHaveLength(MENU_MOCK.length);
-});
+      const btnCategory = screen.getByRole("button", {
+        name: `${category} button`,
+      });
 
-test("It should render meals from a specific category when the selected category is clicked.", async () => {
-  renderComponent();
+      expect(btnCategory).toBeInTheDocument();
 
-  const categories = getCategories(MENU_MOCK);
-  const category = categories[0];
+      await user.click(btnCategory);
 
-  const btnCategory = screen.getByRole("button", {
-    name: `${category} button`,
+      const categoryFoods = mockMenu.filter(
+        (food) => food.category === category
+      );
+
+      const articles = screen.getAllByRole("article");
+      const foodItems = articles.filter((article) =>
+        article.classList.contains("item")
+      );
+
+      expect(foodItems).toHaveLength(categoryFoods.length);
+    });
+
+    test("It should render all meals when you click on the 'all' category.", async () => {
+      renderComponent();
+
+      const btnAll = screen.getByRole("button", {
+        name: `all button`,
+      });
+
+      expect(btnAll).toBeInTheDocument();
+
+      await user.click(btnAll);
+
+      const articles = screen.getAllByRole("article");
+      const foodItems = articles.filter((article) =>
+        article.classList.contains("item")
+      );
+
+      expect(foodItems).toHaveLength(mockMenu.length);
+    });
   });
-
-  expect(btnCategory).toBeInTheDocument();
-
-  await user.click(btnCategory);
-
-  const categoryFoods = MENU_MOCK.filter((food) => food.category === category);
-
-  const articles = screen.getAllByRole("article");
-  const foodItems = articles.filter((article) =>
-    article.classList.contains("item_container")
-  );
-
-  expect(foodItems).toHaveLength(categoryFoods.length);
-});
-
-test("It should render all meals when you click on the 'all' category.", async () => {
-  renderComponent();
-
-  const btnAll = screen.getByRole("button", {
-    name: `all button`,
-  });
-
-  expect(btnAll).toBeInTheDocument();
-
-  await user.click(btnAll);
-
-  const articles = screen.getAllByRole("article");
-  const foodItems = articles.filter((article) =>
-    article.classList.contains("item_container")
-  );
-
-  expect(foodItems).toHaveLength(MENU_MOCK.length);
 });

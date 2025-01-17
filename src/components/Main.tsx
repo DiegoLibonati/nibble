@@ -24,16 +24,16 @@ export const Main = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="main_container">
-      <section className="title_container">
-        <article className="title_container_center">
+    <main className="main">
+      <section className="header">
+        <article className="header__wrapper">
           <h1>Our Menu</h1>
           <div></div>
         </article>
       </section>
 
-      <section className="btns_container">
-        <article className="btns_container_center">
+      <section className="btns">
+        <article className="btns__wrapper">
           <BtnCategory
             category={"all"}
             onClick={() => handleSetFoodByCategory("all")}
@@ -50,7 +50,7 @@ export const Main = (): JSX.Element => {
         </article>
       </section>
 
-      <section className="items_container">
+      <section className="items">
         {foods.map((food) => {
           return (
             <ItemMenu

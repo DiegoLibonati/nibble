@@ -1,12 +1,23 @@
 import { getCategories } from "./getCategories";
 
-import { MENU_MOCK } from "../tests/constants/constants";
+import { mockMenu } from "../tests/jest.constants";
 
-test("It should return a list of strings if 'getCategories' is execute with a menu.", () => {
-  const categories = getCategories(MENU_MOCK);
+jest.mock("../constants/data.ts", () => ({
+  get menu() {
+    return mockMenu;
+  },
+}));
 
-  expect(categories.length).toBeTruthy();
-  expect(categories).toHaveLength(
-    Array.from(new Set(MENU_MOCK.map((category) => category.category))).length
-  );
+describe("getCategories.ts", () => {
+  describe("General Tests.", () => {
+    test("It should return a list of strings if 'getCategories' is execute with a menu.", () => {
+      const categories = getCategories(mockMenu);
+
+      expect(categories.length).toBeTruthy();
+      expect(categories).toHaveLength(
+        Array.from(new Set(mockMenu.map((category) => category.category)))
+          .length
+      );
+    });
+  });
 });

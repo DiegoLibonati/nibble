@@ -3,7 +3,7 @@ import user from "@testing-library/user-event";
 
 import { BtnCategory } from "./BtnCategory";
 
-import { MENU_MOCK } from "../tests/constants/constants";
+import { mockMenu } from "../tests/jest.constants";
 
 type RenderComponent = {
   props: {
@@ -14,7 +14,7 @@ type RenderComponent = {
 };
 
 const renderComponent = (): RenderComponent => {
-  const FOOD = MENU_MOCK[0];
+  const FOOD = mockMenu[0];
 
   const props = {
     onClick: jest.fn(),
@@ -31,14 +31,26 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It should render a button with the category name and execute onClick fn when executed.", async () => {
-  const { props } = renderComponent();
+jest.mock("../constants/data.ts", () => ({
+  get menu() {
+    return mockMenu;
+  },
+}));
 
-  const btn = screen.getByRole("button", { name: `${props.category} button` });
+describe("BtnCategory.tsx", () => {
+  describe("General Tests.", () => {
+    test("It should render a button with the category name and execute onClick fn when executed.", async () => {
+      const { props } = renderComponent();
 
-  expect(btn).toBeInTheDocument();
+      const btn = screen.getByRole("button", {
+        name: `${props.category} button`,
+      });
 
-  await user.click(btn);
+      expect(btn).toBeInTheDocument();
 
-  expect(props.onClick).toHaveBeenCalledTimes(1);
+      await user.click(btn);
+
+      expect(props.onClick).toHaveBeenCalledTimes(1);
+    });
+  });
 });

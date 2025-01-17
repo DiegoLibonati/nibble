@@ -1,4 +1,4 @@
-export const MENU_MOCK = [
+export const mockMenu = [
   {
     id: 1,
     title: "buttermilk pancakes",
