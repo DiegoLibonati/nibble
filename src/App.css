@@ -1,4 +1,4 @@
-.main {
+.main-app {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
   height: 15rem;
 }
 
-.header__wrapper {
+.header__content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,17 +24,17 @@
   height: 100%;
 }
 
-.header__wrapper h1 {
+.header__content-title {
   font-size: 5rem;
 }
 
-.header__wrapper div {
+.header__content-separator {
   width: 10rem;
   height: 0.5rem;
   background-color: var(--primary-color);
 }
 
-.btns {
+.options {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@
   height: auto;
 }
 
-.btns__wrapper {
+.options__btns {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,106 +50,18 @@
   width: 90%;
 }
 
-.btns__wrapper button {
-  padding: 1rem;
-  margin: 0.5rem;
-  font-size: 1.5rem;
-  background: none;
-  border-radius: 1rem;
-  border: 0.2rem solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-.items {
+.items-menu {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 90%;
   flex-flow: row wrap;
   height: auto;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: row wrap;
-  height: auto;
-  width: 100%;
-  margin-bottom: 1rem;
-  box-shadow: rgba(var(--secondary-int-color), 0.2) 0 .8rem 2.4rem;
-  border-radius: 1rem;
-}
-
-.item img {
-  width: 100%;
-  height: 25rem;
-  object-fit: cover;
-}
-
-.item__description {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-flow: row wrap;
-  width: 100%;
-  height: auto;
-  padding: 1rem;
-}
-
-.item__description__header {
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  width: 100%;
-  border-bottom: 0.1rem solid var(--primary-color);
-  padding: 1rem;
-}
-
-.item__description__header h2 {
-  font-size: 1.5rem;
-}
-
-.item__description__header p {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  margin: 0;
-}
-
-.item__text {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  padding: 1rem;
-}
-
-@media only screen and (min-width: 540px) {
-  .item {
-    width: 40rem;
-  }
 }
 
 @media only screen and (min-width: 1024px) {
-  .items {
+  .items-menu {
     justify-content: space-evenly;
     width: 100rem;
-  }
-
-  .item {
-    align-items: flex-start;
-    width: 40rem;
-    height: 20rem;
-  }
-
-  .item img {
-    width: 40%;
-    height: 20rem;
-  }
-
-  .item__description {
-    width: 60%;
   }
 }

@@ -48,7 +48,7 @@ describe("Main.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const foodItems = articles.filter((article) =>
-        article.classList.contains("item")
+        article.classList.contains("item-menu")
       );
 
       expect(foodItems).toHaveLength(mockMenu.length);
@@ -74,7 +74,7 @@ describe("Main.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const foodItems = articles.filter((article) =>
-        article.classList.contains("item")
+        article.classList.contains("item-menu")
       );
 
       expect(foodItems).toHaveLength(categoryFoods.length);
@@ -93,7 +93,7 @@ describe("Main.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const foodItems = articles.filter((article) =>
-        article.classList.contains("item")
+        article.classList.contains("item-menu")
       );
 
       expect(foodItems).toHaveLength(mockMenu.length);

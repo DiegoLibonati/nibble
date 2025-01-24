@@ -1,3 +1,5 @@
+import "./ItemMenu.css";
+
 interface ItemMenuProps {
   title: string;
   price: number;
@@ -12,16 +14,16 @@ export const ItemMenu = ({
   desc,
 }: ItemMenuProps): JSX.Element => {
   return (
-    <article className="item">
-      <img src={img} alt={title}></img>
+    <article className="item-menu">
+      <img src={img} alt={title} className="item-menu__img"></img>
 
-      <div className="item__description">
-        <div className="item__description__header">
-          <h2>{title}</h2>
-          <p>${price}</p>
+      <div className="item-menu__description">
+        <div className="item__description-header">
+          <h2 className="item__description-header-title">{title}</h2>
+          <p className="item__description-header-price">${price}</p>
         </div>
 
-        <p className="item__text">{desc}</p>
+        <p className="item-menu__description-text">{desc}</p>
       </div>
     </article>
   );
