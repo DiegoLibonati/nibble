@@ -17,13 +17,13 @@ export const ItemMenu = ({
     <article className="item-menu">
       <img src={img} alt={title} className="item-menu__img"></img>
 
-      <div className="item-menu__description">
-        <div className="item__description-header">
-          <h2 className="item__description-header-title">{title}</h2>
-          <p className="item__description-header-price">${price}</p>
+      <div className="item-menu__content">
+        <div className="item-menu__header">
+          <h2 className="item-menu__title">{title}</h2>
+          <p className="item-menu__price">${price}</p>
         </div>
 
-        <p className="item-menu__description-text">{desc}</p>
+        <p className="item-menu__description">{desc}</p>
       </div>
     </article>
   );

@@ -25,10 +25,10 @@ export const Main = (): JSX.Element => {
 
   return (
     <main className="main-app">
-      <section className="header">
+      <section className="header-wrapper">
         <article className="header__content">
-          <h1 className="header__content-title">Our Menu</h1>
-          <div className="header__content-separator"></div>
+          <h1 className="header__title">Our Menu</h1>
+          <div className="header__separator"></div>
         </article>
       </section>
 

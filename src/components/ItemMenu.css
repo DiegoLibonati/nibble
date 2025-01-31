@@ -16,7 +16,7 @@
   object-fit: cover;
 }
 
-.item-menu__description {
+.item-menu__content {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -26,7 +26,7 @@
   padding: 1rem;
 }
 
-.item__description-header {
+.item-menu__header {
   height: 5rem;
   display: flex;
   align-items: center;
@@ -37,18 +37,18 @@
   padding: 1rem;
 }
 
-.item__description-header-title {
+.item-menu__title {
   font-size: 1.5rem;
 }
 
-.item__description-header-price {
+.item-menu__price {
   font-size: 1.5rem;
   color: var(--primary-color);
   font-weight: 600;
   margin: 0;
 }
 
-.item-menu__description-text {
+.item-menu__description {
   font-size: 1.5rem;
   font-weight: 600;
   margin-top: 1rem;
@@ -73,7 +73,7 @@
     height: 20rem;
   }
 
-  .item-menu__description {
+  .item-menu__content {
     width: 60%;
   }
 }
