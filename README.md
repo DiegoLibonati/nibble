@@ -22,10 +22,6 @@ I made a web application that allows you to see a food menu. This menu has diffe
 #### Dependencies
 
 ```
-"@types/jest": "^29.5.13"
-"@types/node": "^20.10.6"
-"@types/react": "^18.2.46"
-"@types/react-dom": "^18.2.18"
 "react": "^18.2.0"
 "react-dom": "^18.2.0"
 "react-scripts": "5.0.1"
@@ -39,10 +35,14 @@ I made a web application that allows you to see a food menu. This menu has diffe
 "@testing-library/jest-dom": "^6.6.2"
 "@testing-library/react": "^16.0.1"
 "@testing-library/user-event": "^14.5.2"
-"typescript": "^5.3.3"
+"@types/jest": "^29.5.13"
+"@types/node": "^20.10.6"
+"@types/react": "^18.2.46"
+"@types/react-dom": "^18.2.18"
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
 "ts-jest": "^29.2.5"
+"typescript": "^4.9.5"
 ```
 
 ## Portfolio Link

@@ -1,6 +1,6 @@
 import { getCategories } from "./getCategories";
 
-import { mockMenu } from "../tests/jest.constants";
+import { mockMenu } from "../../tests/jest.constants";
 
 jest.mock("../constants/data.ts", () => ({
   get menu() {

@@ -5,7 +5,7 @@ import { Main } from "./Main";
 
 import { getCategories } from "../helpers/getCategories";
 
-import { mockMenu } from "../tests/jest.constants";
+import { mockMenu } from "../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

@@ -3,7 +3,7 @@ import user from "@testing-library/user-event";
 
 import { BtnCategory } from "./BtnCategory";
 
-import { mockMenu } from "../tests/jest.constants";
+import { mockMenu } from "../../tests/jest.constants";
 
 type RenderComponent = {
   props: {
