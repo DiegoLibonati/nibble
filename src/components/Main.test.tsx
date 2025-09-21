@@ -1,11 +1,11 @@
 import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { Main } from "./Main";
+import { Main } from "@src/components/Main";
 
-import { getCategories } from "../helpers/getCategories";
+import { getCategories } from "@src/helpers/getCategories";
 
-import { mockMenu } from "../../tests/jest.constants";
+import { mockMenu } from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

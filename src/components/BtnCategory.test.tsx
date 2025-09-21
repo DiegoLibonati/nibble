@@ -1,9 +1,9 @@
 import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { BtnCategory } from "./BtnCategory";
+import { BtnCategory } from "@src/components/BtnCategory";
 
-import { mockMenu } from "../../tests/jest.constants";
+import { mockMenu } from "@tests/jest.constants";
 
 type RenderComponent = {
   props: {

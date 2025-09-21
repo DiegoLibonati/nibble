@@ -1,8 +1,8 @@
 import { screen, render } from "@testing-library/react";
 
-import { ItemMenu } from "./ItemMenu";
+import { ItemMenu } from "@src/components/ItemMenu";
 
-import { mockMenu } from "../../tests/jest.constants";
+import { mockMenu } from "@tests/jest.constants";
 
 type RenderComponent = {
   props: {

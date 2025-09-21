@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
 
-import { Food } from "../entities/entities";
+import { Food } from "@src/entities/entities";
 
-import { ItemMenu } from "./ItemMenu";
-import { BtnCategory } from "./BtnCategory";
+import { ItemMenu } from "@src/components/ItemMenu";
+import { BtnCategory } from "@src/components/BtnCategory";
 
-import { getCategories } from "../helpers/getCategories";
-import { menu } from "../constants/data";
+import { getCategories } from "@src/helpers/getCategories";
+import { menu } from "@src/constants/data";
 
 export const Main = (): JSX.Element => {
   const [foods, setFoods] = useState<Food[]>(menu);

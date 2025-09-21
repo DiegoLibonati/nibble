@@ -1,8 +1,8 @@
-import { getCategories } from "./getCategories";
+import { getCategories } from "@src/helpers/getCategories";
 
-import { mockMenu } from "../../tests/jest.constants";
+import { mockMenu } from "@tests/jest.constants";
 
-jest.mock("../constants/data.ts", () => ({
+jest.mock("@src/constants/data.ts", () => ({
   get menu() {
     return mockMenu;
   },

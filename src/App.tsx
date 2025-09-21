@@ -1,6 +1,6 @@
-import { Main } from "./components/Main";
+import { Main } from "@src/components/Main";
 
-import "./App.css";
+import "@src/App.css";
 
 function App(): JSX.Element {
   return <Main></Main>;

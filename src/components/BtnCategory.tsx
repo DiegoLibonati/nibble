@@ -1,4 +1,4 @@
-import "./BtnCategory.css";
+import "@src/components/BtnCategory.css";
 
 interface BtnCategoryProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;

@@ -1,4 +1,4 @@
-import { Food } from "../entities/entities";
+import { Food } from "@src/entities/entities";
 
 export const menu: Food[] = [
   {

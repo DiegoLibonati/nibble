@@ -1,4 +1,4 @@
-import "./ItemMenu.css";
+import "@src/components/ItemMenu.css";
 
 interface ItemMenuProps {
   title: string;
