@@ -1,6 +1,6 @@
-import { Food } from "@src/entities/entities";
+import { Food } from "@src/entities/app";
 
-export const menu: Food[] = [
+const menu: Food[] = [
   {
     id: 1,
     title: "buttermilk pancakes",
@@ -74,3 +74,5 @@ export const menu: Food[] = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+export default menu;

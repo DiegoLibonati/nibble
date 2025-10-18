@@ -1,7 +1,7 @@
 import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { Main } from "@src/components/Main";
+import { MenuPage } from "@src/pages/MenuPage/MenuPage";
 
 import { getCategories } from "@src/helpers/getCategories";
 
@@ -12,18 +12,17 @@ type RenderComponent = {
 };
 
 const renderComponent = (): RenderComponent => {
-  const { container } = render(<Main />);
+  const { container } = render(<MenuPage />);
 
   return {
     container: container,
   };
 };
 
-jest.mock("../constants/data.ts", () => ({
-  get menu() {
-    return mockMenu;
-  },
-}));
+jest.mock("@src/constants/menu", () => {
+  const { mockMenu } = jest.requireActual("@tests/jest.constants");
+  return { __esModule: true, default: mockMenu };
+});
 
 describe("Main.tsx", () => {
   describe("General Tests.", () => {

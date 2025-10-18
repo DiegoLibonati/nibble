@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
 
-import { Food } from "@src/entities/entities";
+import { Food } from "@src/entities/app";
 
-import { ItemMenu } from "@src/components/ItemMenu";
-import { BtnCategory } from "@src/components/BtnCategory";
+import { BtnCategory } from "@src/components/BtnCategory/BtnCategory";
+import { ItemMenu } from "@src/components/ItemMenu/ItemMenu";
 
 import { getCategories } from "@src/helpers/getCategories";
-import { menu } from "@src/constants/data";
 
-export const Main = (): JSX.Element => {
+import menu from "@src/constants/menu";
+
+import "@src/pages/MenuPage/MenuPage.css";
+
+export const MenuPage = () => {
   const [foods, setFoods] = useState<Food[]>(menu);
 
   const handleSetFoodByCategory = (category: string): void => {
@@ -24,7 +27,7 @@ export const Main = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="main-app">
+    <main className="menu-page">
       <section className="header-wrapper">
         <article className="header__content">
           <h1 className="header__title">Our Menu</h1>

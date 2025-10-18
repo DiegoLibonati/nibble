@@ -2,11 +2,10 @@ import { getCategories } from "@src/helpers/getCategories";
 
 import { mockMenu } from "@tests/jest.constants";
 
-jest.mock("@src/constants/data.ts", () => ({
-  get menu() {
-    return mockMenu;
-  },
-}));
+jest.mock("@src/constants/menu", () => {
+  const { mockMenu } = jest.requireActual("@tests/jest.constants");
+  return { __esModule: true, default: mockMenu };
+});
 
 describe("getCategories.ts", () => {
   describe("General Tests.", () => {

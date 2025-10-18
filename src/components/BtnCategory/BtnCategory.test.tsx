@@ -1,15 +1,14 @@
 import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import { BtnCategory } from "@src/components/BtnCategory";
+import { BtnCategoryProps } from "@src/entities/props";
+
+import { BtnCategory } from "@src/components/BtnCategory/BtnCategory";
 
 import { mockMenu } from "@tests/jest.constants";
 
 type RenderComponent = {
-  props: {
-    onClick: React.MouseEventHandler<HTMLButtonElement>;
-    category: string;
-  };
+  props: { onClick: jest.Mock } & BtnCategoryProps;
   container: HTMLElement;
 };
 
@@ -31,11 +30,10 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("../constants/data.ts", () => ({
-  get menu() {
-    return mockMenu;
-  },
-}));
+jest.mock("@src/constants/menu", () => {
+  const { mockMenu } = jest.requireActual("@tests/jest.constants");
+  return { __esModule: true, default: mockMenu };
+});
 
 describe("BtnCategory.tsx", () => {
   describe("General Tests.", () => {

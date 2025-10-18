@@ -1,13 +1,10 @@
-import "@src/components/BtnCategory.css";
+import { BtnCategoryProps } from "@src/entities/props";
 
-interface BtnCategoryProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-  category: string;
-}
+import "@src/components/BtnCategory/BtnCategory.css";
 
 export const BtnCategory = ({
-  onClick,
   category,
+  onClick,
 }: BtnCategoryProps): JSX.Element => {
   return (
     <button

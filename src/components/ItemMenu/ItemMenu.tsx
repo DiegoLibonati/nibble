@@ -1,11 +1,6 @@
-import "@src/components/ItemMenu.css";
+import { ItemMenuProps } from "@src/entities/props";
 
-interface ItemMenuProps {
-  title: string;
-  price: number;
-  img: string;
-  desc: string;
-}
+import "@src/components/ItemMenu/ItemMenu.css";
 
 export const ItemMenu = ({
   title,

@@ -1,16 +1,13 @@
 import { screen, render } from "@testing-library/react";
 
-import { ItemMenu } from "@src/components/ItemMenu";
+import { ItemMenuProps } from "@src/entities/props";
+
+import { ItemMenu } from "@src/components/ItemMenu/ItemMenu";
 
 import { mockMenu } from "@tests/jest.constants";
 
 type RenderComponent = {
-  props: {
-    title: string;
-    price: number;
-    img: string;
-    desc: string;
-  };
+  props: ItemMenuProps;
   container: HTMLElement;
 };
 
@@ -39,11 +36,10 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("../constants/data.ts", () => ({
-  get menu() {
-    return mockMenu;
-  },
-}));
+jest.mock("@src/constants/menu", () => {
+  const { mockMenu } = jest.requireActual("@tests/jest.constants");
+  return { __esModule: true, default: mockMenu };
+});
 
 describe("ItemMenu.tsx", () => {
   describe("General Tests.", () => {
