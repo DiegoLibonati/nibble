@@ -1,13 +1,8 @@
-import { ItemMenuProps } from "@src/entities/props";
+import { ItemMenuProps } from "@/types/props";
 
-import "@src/components/ItemMenu/ItemMenu.css";
+import "@/components/ItemMenu/ItemMenu.css";
 
-export const ItemMenu = ({
-  title,
-  price,
-  img,
-  desc,
-}: ItemMenuProps): JSX.Element => {
+const ItemMenu = ({ title, price, img, desc }: ItemMenuProps) => {
   return (
     <article className="item-menu">
       <img src={img} alt={title} className="item-menu__img"></img>
@@ -23,3 +18,5 @@ export const ItemMenu = ({
     </article>
   );
 };
+
+export default ItemMenu;

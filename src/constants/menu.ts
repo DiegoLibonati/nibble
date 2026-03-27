@@ -1,6 +1,6 @@
-import { Food } from "@src/entities/app";
+import { Food } from "@/types/app";
 
-import assets from "@src/assets/export";
+import assets from "@/assets/export";
 
 const menu: Food[] = [
   {

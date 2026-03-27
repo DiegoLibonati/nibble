@@ -1,13 +1,13 @@
-import Item1 from "@src/assets/images/item-1.jpeg";
-import Item2 from "@src/assets/images/item-2.jpeg";
-import Item3 from "@src/assets/images/item-3.jpeg";
-import Item4 from "@src/assets/images/item-4.jpeg";
-import Item5 from "@src/assets/images/item-5.jpeg";
-import Item6 from "@src/assets/images/item-6.jpeg";
-import Item7 from "@src/assets/images/item-7.jpeg";
-import Item8 from "@src/assets/images/item-8.jpeg";
-import Item9 from "@src/assets/images/item-9.jpeg";
-import Item10 from "@src/assets/images/item-10.jpeg";
+import Item1 from "@/assets/images/item-1.jpeg";
+import Item2 from "@/assets/images/item-2.jpeg";
+import Item3 from "@/assets/images/item-3.jpeg";
+import Item4 from "@/assets/images/item-4.jpeg";
+import Item5 from "@/assets/images/item-5.jpeg";
+import Item6 from "@/assets/images/item-6.jpeg";
+import Item7 from "@/assets/images/item-7.jpeg";
+import Item8 from "@/assets/images/item-8.jpeg";
+import Item9 from "@/assets/images/item-9.jpeg";
+import Item10 from "@/assets/images/item-10.jpeg";
 
 const assets = {
   images: {

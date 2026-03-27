@@ -1,17 +1,17 @@
 import { useMemo, useState } from "react";
 
-import { Food } from "@src/entities/app";
+import { Food } from "@/types/app";
 
-import { BtnCategory } from "@src/components/BtnCategory/BtnCategory";
-import { ItemMenu } from "@src/components/ItemMenu/ItemMenu";
+import BtnCategory from "@/components/BtnCategory/BtnCategory";
+import ItemMenu from "@/components/ItemMenu/ItemMenu";
 
-import { getCategories } from "@src/helpers/getCategories";
+import { getCategories } from "@/helpers/getCategories";
 
-import menu from "@src/constants/menu";
+import menu from "@/constants/menu";
 
-import "@src/pages/MenuPage/MenuPage.css";
+import "@/pages/MenuPage/MenuPage.css";
 
-export const MenuPage = () => {
+const MenuPage = () => {
   const [foods, setFoods] = useState<Food[]>(menu);
 
   const handleSetFoodByCategory = (category: string): void => {
@@ -69,3 +69,5 @@ export const MenuPage = () => {
     </main>
   );
 };
+
+export default MenuPage;

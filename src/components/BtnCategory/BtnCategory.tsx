@@ -1,11 +1,8 @@
-import { BtnCategoryProps } from "@src/entities/props";
+import { BtnCategoryProps } from "@/types/props";
 
-import "@src/components/BtnCategory/BtnCategory.css";
+import "@/components/BtnCategory/BtnCategory.css";
 
-export const BtnCategory = ({
-  category,
-  onClick,
-}: BtnCategoryProps): JSX.Element => {
+const BtnCategory = ({ category, onClick }: BtnCategoryProps) => {
   return (
     <button
       className="btn-category"
@@ -17,3 +14,5 @@ export const BtnCategory = ({
     </button>
   );
 };
+
+export default BtnCategory;

@@ -1,6 +1,6 @@
-import { MenuPage } from "@src/pages/MenuPage/MenuPage";
+import MenuPage from "@/pages/MenuPage/MenuPage";
 
-function App(): JSX.Element {
+function App() {
   return <MenuPage></MenuPage>;
 }
 

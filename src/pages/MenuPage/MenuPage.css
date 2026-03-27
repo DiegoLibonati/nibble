@@ -31,7 +31,7 @@
 .header__separator {
   width: 10rem;
   height: 0.5rem;
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
 }
 
 .options {
