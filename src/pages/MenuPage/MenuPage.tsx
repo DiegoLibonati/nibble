@@ -27,15 +27,15 @@ const MenuPage = () => {
   }, []);
 
   return (
-    <main className="menu-page">
-      <section className="header-wrapper">
+    <main className="menu-page" aria-label="Food menu">
+      <section className="header-wrapper" aria-label="Menu header">
         <article className="header__content">
           <h1 className="header__title">Our Menu</h1>
-          <div className="header__separator"></div>
+          <div className="header__separator" role="presentation"></div>
         </article>
       </section>
 
-      <section className="options">
+      <section className="options" aria-label="Category filters">
         <article className="options__btns">
           <BtnCategory
             category={"all"}
@@ -53,7 +53,7 @@ const MenuPage = () => {
         </article>
       </section>
 
-      <section className="items-menu">
+      <section className="items-menu" aria-label="Menu items">
         {foods.map((food) => {
           return (
             <ItemMenu

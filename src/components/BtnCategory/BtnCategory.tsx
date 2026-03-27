@@ -8,7 +8,7 @@ const BtnCategory = ({ category, onClick }: BtnCategoryProps) => {
       className="btn-category"
       onClick={onClick}
       type="button"
-      aria-label={`${category} button`}
+      aria-label={category === "all" ? "Show all menu items" : `Filter menu by ${category}`}
     >
       {category}
     </button>

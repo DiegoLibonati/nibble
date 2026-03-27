@@ -1,9 +1,9 @@
 .btn-category {
-  padding: 1rem;
-  margin: 0.5rem;
-  font-size: 1.5rem;
+  padding: 0.625rem;
+  margin: 0.313rem;
+  font-size: 0.938rem;
   background: none;
-  border-radius: 1rem;
-  border: 0.2rem solid var(--color-primary);
+  border-radius: 0.625rem;
+  border: 0.125rem solid var(--color-primary);
   color: var(--color-primary);
 }
