@@ -25,6 +25,10 @@ const renderComponent = (overrides?: Partial<BtnCategoryProps>): RenderComponent
 };
 
 describe("BtnCategory", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render a button element", () => {
     renderComponent();
     expect(screen.getByRole("button")).toBeInTheDocument();

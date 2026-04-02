@@ -15,6 +15,10 @@ const renderPage = (): RenderPage => {
 };
 
 describe("MenuPage", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render the main element with aria-label 'Food menu'", () => {
     renderPage();
     expect(screen.getByRole("main", { name: "Food menu" })).toBeInTheDocument();
