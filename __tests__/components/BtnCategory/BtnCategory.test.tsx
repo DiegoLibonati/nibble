@@ -10,9 +10,9 @@ type RenderComponent = {
   props: BtnCategoryProps;
 };
 
-const renderComponent = (overrides?: Partial<BtnCategoryProps>): RenderComponent => {
-  const mockOnClick = jest.fn();
+const mockOnClick = jest.fn();
 
+const renderComponent = (overrides?: Partial<BtnCategoryProps>): RenderComponent => {
   const props: BtnCategoryProps = {
     category: "breakfast",
     onClick: mockOnClick,
@@ -60,10 +60,9 @@ describe("BtnCategory", () => {
   });
 
   it("should call onClick when the button is clicked", async () => {
-    const mockOnClick = jest.fn();
     const user = userEvent.setup();
 
-    renderComponent({ onClick: mockOnClick });
+    renderComponent();
 
     await user.click(screen.getByRole("button"));
 
@@ -71,8 +70,7 @@ describe("BtnCategory", () => {
   });
 
   it("should not call onClick when not clicked", () => {
-    const mockOnClick = jest.fn();
-    renderComponent({ onClick: mockOnClick });
+    renderComponent();
     expect(mockOnClick).not.toHaveBeenCalled();
   });
 });

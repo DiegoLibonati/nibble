@@ -24,6 +24,10 @@ const renderComponent = (overrides?: Partial<ItemMenuProps>): RenderComponent =>
 };
 
 describe("ItemMenu", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render an article element", () => {
     renderComponent();
     expect(screen.getByRole("article")).toBeInTheDocument();
