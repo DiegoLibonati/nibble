@@ -5,10 +5,10 @@ import type { BtnCategoryProps } from "@/types/props";
 
 import BtnCategory from "@/components/BtnCategory/BtnCategory";
 
-type RenderComponent = {
+interface RenderComponent {
   container: HTMLElement;
   props: BtnCategoryProps;
-};
+}
 
 const mockOnClick = jest.fn();
 

@@ -5,9 +5,9 @@ import MenuPage from "@/pages/MenuPage/MenuPage";
 
 import { mockMenu } from "@tests/__mocks__/menu.mock";
 
-type RenderPage = {
+interface RenderPage {
   container: HTMLElement;
-};
+}
 
 const renderPage = (): RenderPage => {
   const { container } = render(<MenuPage />);

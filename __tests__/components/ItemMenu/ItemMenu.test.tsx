@@ -4,10 +4,10 @@ import type { ItemMenuProps } from "@/types/props";
 
 import ItemMenu from "@/components/ItemMenu/ItemMenu";
 
-type RenderComponent = {
+interface RenderComponent {
   container: HTMLElement;
   props: ItemMenuProps;
-};
+}
 
 const renderComponent = (overrides?: Partial<ItemMenuProps>): RenderComponent => {
   const props: ItemMenuProps = {

@@ -1,4 +1,4 @@
-import { Food } from "@/types/app";
+import type { Food } from "@/types/app";
 
 import assets from "@/assets/export";
 

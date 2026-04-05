@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { Food } from "@/types/app";
+import type { JSX } from "react";
 
 import BtnCategory from "@/components/BtnCategory/BtnCategory";
 import ItemMenu from "@/components/ItemMenu/ItemMenu";
@@ -11,11 +11,14 @@ import menu from "@/constants/menu";
 
 import "@/pages/MenuPage/MenuPage.css";
 
-const MenuPage = () => {
-  const [foods, setFoods] = useState<Food[]>(menu);
+const MenuPage = (): JSX.Element => {
+  const [foods, setFoods] = useState(menu);
 
   const handleSetFoodByCategory = (category: string): void => {
-    if (category === "all") return setFoods(menu);
+    if (category === "all") {
+      setFoods(menu);
+      return;
+    }
 
     const newMenu = menu.filter((food) => food.category === category);
 
@@ -39,14 +42,18 @@ const MenuPage = () => {
         <article className="options__btns">
           <BtnCategory
             category={"all"}
-            onClick={() => handleSetFoodByCategory("all")}
+            onClick={() => {
+              handleSetFoodByCategory("all");
+            }}
           ></BtnCategory>
           {categories.map((category: string) => {
             return (
               <BtnCategory
                 key={category}
                 category={category}
-                onClick={() => handleSetFoodByCategory(category)}
+                onClick={() => {
+                  handleSetFoodByCategory(category);
+                }}
               ></BtnCategory>
             );
           })}

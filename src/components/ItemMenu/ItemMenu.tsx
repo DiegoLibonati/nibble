@@ -1,8 +1,9 @@
-import { ItemMenuProps } from "@/types/props";
+import type { JSX } from "react";
+import type { ItemMenuProps } from "@/types/props";
 
 import "@/components/ItemMenu/ItemMenu.css";
 
-const ItemMenu = ({ title, price, img, desc }: ItemMenuProps) => {
+const ItemMenu = ({ title, price, img, desc }: ItemMenuProps): JSX.Element => {
   return (
     <article className="item-menu" aria-label={title}>
       <img src={img} alt={title} className="item-menu__img"></img>

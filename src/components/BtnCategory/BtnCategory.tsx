@@ -1,8 +1,9 @@
-import { BtnCategoryProps } from "@/types/props";
+import type { JSX } from "react";
+import type { BtnCategoryProps } from "@/types/props";
 
 import "@/components/BtnCategory/BtnCategory.css";
 
-const BtnCategory = ({ category, onClick }: BtnCategoryProps) => {
+const BtnCategory = ({ category, onClick }: BtnCategoryProps): JSX.Element => {
   return (
     <button
       className="btn-category"
