@@ -1,7 +1,7 @@
 {
-  "name": "Menu React",
-  "short_name": "Menu",
-  "description": "I made a web application that allows you to see a food menu. This menu has different buttons and depending on which button we touch it will bring us that type of food. If we tap on All, it will bring up all the meals again.",
+  "name": "Nibble",
+  "short_name": "Nibble",
+  "description": "Nibble is a single-page food menu application built with React 19 and TypeScript. It presents a curated list of dishes — breakfasts, lunches, and shakes — each displayed as a card showing the dish name, image, description, and price.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

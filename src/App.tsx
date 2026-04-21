@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 
-import MenuPage from "@/pages/MenuPage/MenuPage";
+import NibblePage from "@/pages/NibblePage/NibblePage";
 
 function App(): JSX.Element {
-  return <MenuPage></MenuPage>;
+  return <NibblePage></NibblePage>;
 }
 
 export default App;

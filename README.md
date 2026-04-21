@@ -1,4 +1,4 @@
-# Menu React
+# Nibble
 
 ## Educational Purpose
 
@@ -17,7 +17,13 @@ The application will open automatically at `http://localhost:3000`
 
 ## Description
 
-I made a web application that allows you to see a food menu. This menu has different buttons and depending on which button we touch it will bring us that type of food. If we tap on All, it will bring up all the meals again.
+**Nibble** is a single-page food menu application built with React 19 and TypeScript. It presents a curated list of dishes — breakfasts, lunches, and shakes — each displayed as a card showing the dish name, image, description, and price.
+
+The core feature is category-based filtering: a row of buttons at the top of the page lets users narrow down the menu to a specific food category instantly, with no page reload or network request. Selecting "All" resets the view and shows every item again. The filtering logic is driven by React state (`useState`) and a memoized category list (`useMemo`), so the UI stays responsive and re-renders only when necessary.
+
+The data layer is fully static — the menu is defined as a typed `Food[]` array in a constants file, which keeps the app self-contained and fast to load. The component tree is intentionally flat: a single `NibblePage` orchestrates the state and renders `BtnCategory` buttons and `ItemMenu` cards as pure, prop-driven components with no side effects.
+
+The project is set up with a complete development toolchain: Vite for fast builds and HMR, ESLint with TypeScript rules for code quality, Prettier for consistent formatting, Husky + lint-staged for pre-commit enforcement, and a Jest + Testing Library suite with 70% coverage thresholds to keep the logic verifiable.
 
 ## Technologies used
 
@@ -67,11 +73,7 @@ I made a web application that allows you to see a food menu. This menu has diffe
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Menu-React`](https://www.diegolibonati.com.ar/#/project/Menu-React)
-
-## Video
-
-https://user-images.githubusercontent.com/99032604/198900841-8d70a4c7-80fa-4a15-965f-30f6e4c765b5.mp4
+[`https://www.diegolibonati.com.ar/#/project/nibble`](https://www.diegolibonati.com.ar/#/project/nibble)
 
 ## Testing
 

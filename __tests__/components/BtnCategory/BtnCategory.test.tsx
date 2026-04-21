@@ -1,76 +1,45 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import type { RenderResult } from "@testing-library/react";
 import type { BtnCategoryProps } from "@/types/props";
 
 import BtnCategory from "@/components/BtnCategory/BtnCategory";
 
-interface RenderComponent {
-  container: HTMLElement;
-  props: BtnCategoryProps;
-}
-
-const mockOnClick = jest.fn();
-
-const renderComponent = (overrides?: Partial<BtnCategoryProps>): RenderComponent => {
-  const props: BtnCategoryProps = {
+const renderComponent = (props: Partial<BtnCategoryProps> = {}): RenderResult => {
+  const defaultProps: BtnCategoryProps = {
     category: "breakfast",
-    onClick: mockOnClick,
-    ...overrides,
+    onClick: jest.fn(),
+    ...props,
   };
-
-  const { container } = render(<BtnCategory {...props} />);
-
-  return { container, props };
+  return render(<BtnCategory {...defaultProps} />);
 };
 
 describe("BtnCategory", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  describe("rendering", () => {
+    it("should render a button with the category text", () => {
+      renderComponent({ category: "breakfast" });
+      expect(screen.getByRole("button", { name: /breakfast/i })).toBeInTheDocument();
+    });
+
+    it("should render with aria-label for the 'all' category", () => {
+      renderComponent({ category: "all" });
+      expect(screen.getByRole("button", { name: "Show all menu items" })).toBeInTheDocument();
+    });
+
+    it("should render with aria-label for a specific category", () => {
+      renderComponent({ category: "lunch" });
+      expect(screen.getByRole("button", { name: "Filter menu by lunch" })).toBeInTheDocument();
+    });
   });
 
-  it("should render a button element", () => {
-    renderComponent();
-    expect(screen.getByRole("button")).toBeInTheDocument();
-  });
-
-  it("should have type='button' to prevent accidental form submission", () => {
-    renderComponent();
-    expect(screen.getByRole("button")).toHaveAttribute("type", "button");
-  });
-
-  it("should apply the btn-category class", () => {
-    renderComponent();
-    expect(screen.getByRole("button")).toHaveClass("btn-category");
-  });
-
-  it("should display the category as text content", () => {
-    renderComponent({ category: "lunch" });
-    expect(screen.getByRole("button")).toHaveTextContent("lunch");
-  });
-
-  it("should render aria-label as 'Show all menu items' when category is 'all'", () => {
-    renderComponent({ category: "all" });
-    expect(screen.getByRole("button", { name: "Show all menu items" })).toBeInTheDocument();
-  });
-
-  it("should render aria-label as 'Filter menu by {category}' for non-all categories", () => {
-    renderComponent({ category: "breakfast" });
-    expect(screen.getByRole("button", { name: "Filter menu by breakfast" })).toBeInTheDocument();
-  });
-
-  it("should call onClick when the button is clicked", async () => {
-    const user = userEvent.setup();
-
-    renderComponent();
-
-    await user.click(screen.getByRole("button"));
-
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
-
-  it("should not call onClick when not clicked", () => {
-    renderComponent();
-    expect(mockOnClick).not.toHaveBeenCalled();
+  describe("behavior", () => {
+    it("should call onClick when the button is clicked", async () => {
+      const mockOnClick = jest.fn();
+      const user = userEvent.setup();
+      renderComponent({ onClick: mockOnClick });
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
   });
 });

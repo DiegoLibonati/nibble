@@ -9,9 +9,9 @@ import { getCategories } from "@/helpers/getCategories";
 
 import menu from "@/constants/menu";
 
-import "@/pages/MenuPage/MenuPage.css";
+import "@/pages/NibblePage/NibblePage.css";
 
-const MenuPage = (): JSX.Element => {
+const NibblePage = (): JSX.Element => {
   const [foods, setFoods] = useState(menu);
 
   const handleSetFoodByCategory = (category: string): void => {
@@ -30,7 +30,7 @@ const MenuPage = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="menu-page" aria-label="Food menu">
+    <main className="nibble-page" aria-label="Food menu">
       <section className="header-wrapper" aria-label="Menu header">
         <article className="header__content">
           <h1 className="header__title">Our Menu</h1>
@@ -77,4 +77,4 @@ const MenuPage = (): JSX.Element => {
   );
 };
 
-export default MenuPage;
+export default NibblePage;
