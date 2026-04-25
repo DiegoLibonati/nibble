@@ -6,10 +6,12 @@ import type { BtnCategoryProps } from "@/types/props";
 
 import BtnCategory from "@/components/BtnCategory/BtnCategory";
 
+const mockOnClick = jest.fn();
+
 const renderComponent = (props: Partial<BtnCategoryProps> = {}): RenderResult => {
   const defaultProps: BtnCategoryProps = {
     category: "breakfast",
-    onClick: jest.fn(),
+    onClick: mockOnClick,
     ...props,
   };
   return render(<BtnCategory {...defaultProps} />);
@@ -35,9 +37,8 @@ describe("BtnCategory", () => {
 
   describe("behavior", () => {
     it("should call onClick when the button is clicked", async () => {
-      const mockOnClick = jest.fn();
       const user = userEvent.setup();
-      renderComponent({ onClick: mockOnClick });
+      renderComponent();
       await user.click(screen.getByRole("button"));
       expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
