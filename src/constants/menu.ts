@@ -1,6 +1,6 @@
 import type { Food } from "@/types/app";
 
-import assets from "@/assets/export";
+import assets from "@/assets/index";
 
 const menu: Food[] = [
   {

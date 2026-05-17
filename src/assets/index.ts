@@ -9,7 +9,7 @@ import Item8 from "@/assets/images/item-8.jpeg";
 import Item9 from "@/assets/images/item-9.jpeg";
 import Item10 from "@/assets/images/item-10.jpeg";
 
-const assets = {
+export default {
   images: {
     Item1: Item1,
     Item2: Item2,
@@ -23,5 +23,3 @@ const assets = {
     Item10: Item10,
   },
 };
-
-export default assets;

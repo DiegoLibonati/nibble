@@ -65,7 +65,7 @@ The project is set up with a complete development toolchain: Vite for fast build
 
 ## Getting Started
 
-The project requires **Node.js >= 22**. Once cloned, the steps below install dependencies and start the Vite dev server with HMR.
+The project requires **Node.js >= 22** (pinned via `.nvmrc`). Once cloned, the steps below install dependencies and start the Vite dev server with HMR.
 
 1. Clone the repository
 2. Navigate to the project folder
@@ -87,86 +87,10 @@ npm run lint:all      # ESLint over src/ and __tests__/ with auto-fix
 npm run format        # Prettier --write on src/
 npm run format:check  # Prettier --check (no writes)
 npm run format:all    # Prettier --write on src/ and __tests__/
+npm run type-check    # tsc --noEmit against tsconfig.app.json
 ```
 
 ESLint uses the flat config (`eslint.config.js`) with `typescript-eslint` recommended rules plus `react-hooks` and `react-refresh` plugins. Prettier is configured with double quotes, semicolons, 2-space indent, ES5 trailing commas, and a 100-character print width.
-
-## Project Structure
-
-```
-Menu-React/
-├── __tests__/
-│   ├── __mocks__/                  # Jest mocks (assets, file, style, menu)
-│   ├── components/
-│   │   ├── BtnCategory/BtnCategory.test.tsx
-│   │   └── ItemMenu/ItemMenu.test.tsx
-│   ├── helpers/getCategories.test.ts
-│   ├── pages/NibblePage/NibblePage.test.tsx
-│   └── jest.setup.ts               # @testing-library/jest-dom matchers
-├── src/
-│   ├── assets/
-│   │   ├── images/                 # item-1.jpeg ... item-10.jpeg
-│   │   └── export.ts               # Typed asset map
-│   ├── components/
-│   │   ├── BtnCategory/            # Category filter button
-│   │   └── ItemMenu/               # Menu item card
-│   ├── constants/menu.ts           # Static Food[] dataset
-│   ├── helpers/getCategories.ts    # Unique categories derivation
-│   ├── pages/NibblePage/           # Page orchestrator (state + filtering)
-│   ├── styles/global.css
-│   ├── types/
-│   │   ├── app.ts                  # Food domain type
-│   │   ├── assets.d.ts             # Image module declarations
-│   │   └── props.ts                # Component prop types
-│   ├── App.tsx
-│   ├── index.css
-│   └── index.tsx                   # ReactDOM.createRoot entry point
-├── .husky/pre-commit               # Hook → `npx lint-staged`
-├── eslint.config.js
-├── jest.config.js
-├── tsconfig.base.json
-├── tsconfig.app.json               # tsc -p for vite build
-├── tsconfig.test.json              # ts-jest tsconfig
-└── vite.config.js
-```
-
-**Folder roles**
-
-- `src/pages/` — Smart components that own state and orchestrate children (only `NibblePage`).
-- `src/components/` — Pure, prop-driven UI components (`BtnCategory`, `ItemMenu`).
-- `src/helpers/` — Pure utility functions (`getCategories`).
-- `src/constants/` — Static data (`menu.ts`, the `Food[]` dataset).
-- `src/types/` — Shared TypeScript types: domain (`Food`), prop interfaces, image module declarations.
-- `src/assets/` — Image files plus a typed `export.ts` re-export map.
-- `__tests__/` — Tests live here, not colocated with source. Mocks under `__tests__/__mocks__/`.
-
-## Architecture & Design Patterns
-
-The app is intentionally minimal: one page, two pure components, one helper, one static dataset. Data flows top-down and state lives in a single place.
-
-```
-src/constants/menu.ts (static Food[])
-  → NibblePage (useState + useMemo)
-    → getCategories(menu) → string[]
-    → BtnCategory (per category, triggers filter)
-    → ItemMenu    (per filtered Food)
-```
-
-**Layers**
-
-- **Data layer** — `src/constants/menu.ts` exports a typed `Food[]`. No fetch, no API, no global store.
-- **Domain types** — `src/types/app.ts` defines `Food = { id, title, category, price, img, desc }`. Single source of truth flowing through the tree.
-- **Page layer** — `NibblePage` owns `foods` state and the `handleSetFoodByCategory` handler. The category list is memoized with `useMemo` so it is computed once.
-- **Component layer** — `BtnCategory` and `ItemMenu` are stateless, prop-driven, and side-effect-free.
-- **Helpers** — `getCategories` is a pure function that derives unique category strings from a `Food[]`, isolated for easy testing.
-
-**Patterns**
-
-- **Container / Presentational split** — `NibblePage` is the container; `BtnCategory` and `ItemMenu` are presentational.
-- **Lifting state up** — Filter state lives in the parent; children are dumb.
-- **Memoization** — `useMemo` avoids re-deriving `categories` on every render.
-- **Path aliases** — `@/*` → `src/*`, `@tests/*` → `__tests__/*`, declared in `vite.config.js`, `tsconfig.base.json`, and `jest.config.js` (`moduleNameMapper`).
-- **Strict TypeScript** — Three configs (`base`, `app`, `test`) with `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` enabled.
 
 ## Testing
 
@@ -182,6 +106,65 @@ npm run test:watch        # Jest in watch mode
 npm run test:coverage     # Coverage report (text/lcov/html in coverage/)
 npx jest __tests__/components/ItemMenu/ItemMenu.test.tsx   # Run a single file
 ```
+
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch.
+
+### Pipeline overview
+
+```
+                  ┌─── PR or push to main ───┐
+                  ▼                          ▼
+┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+│   lint-and-audit     │─▶│      testing     │─▶│      build       │
+│ eslint · type-check  │  │   jest (jsdom)   │  │ tsc + vite build │
+└──────────────────────┘  └──────────────────┘  └──────────────────┘
+```
+
+### Validation jobs (run on every PR and push)
+
+1. **`lint-and-audit`** — runs `npm run lint` (ESLint over `src/`) and `npm run type-check` (`tsc --noEmit` against `tsconfig.app.json`).
+2. **`testing`** — runs `npm run test` (Jest + Testing Library on `jest-environment-jsdom`). Depends on `lint-and-audit`.
+3. **`build`** — runs `npm run build` (full type-check via `tsc -p tsconfig.app.json` followed by the production Vite bundle into `dist/`). Depends on `testing`.
+
+All three jobs run on `ubuntu-latest`, pin Node to the version declared in [`.nvmrc`](.nvmrc) (Node 22) via `actions/setup-node`, and install dependencies with `npm ci` against the committed `package-lock.json` for fully reproducible installs. The jobs are chained with `needs:` so a lint failure short-circuits the pipeline before running the test or build job.
+
+### Conventional Commits
+
+Commits merged into `main` follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `style:`, `ci:`, etc.) so the history stays readable and grouping changes by intent is trivial. The pipeline itself does not parse them — there is no automated versioning or release job in this project — but the convention is enforced by code review.
+
+### Skipping CI
+
+To push a documentation-only change or a trivial tweak without triggering the workflow, append GitHub's standard `[skip ci]` marker to the commit message:
+
+```bash
+git commit -m "docs: fix typo in README [skip ci]"
+```
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run type-check
+
+# testing
+npm run test
+
+# build
+npm run build
+```
+
+### Where the build outputs live
+
+| Output                                   | Location                                                           |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| Validation logs (lint, type-check, test) | **Actions** tab on GitHub                                          |
+| Coverage report (`coverage/`)            | Local only — produced by `npm run test:coverage`, gitignored       |
+| Production bundle (`dist/`)              | Ephemeral, inside the runner — not published as a release artifact |
+
+> **Note:** This pipeline is validation-only. There is no automated release, no tagged version bump, and no artifact uploaded to GitHub Releases. Deploying `dist/` to a host (Netlify, Vercel, GitHub Pages, S3 + CloudFront, etc.) is done manually after a green build.
 
 ## Security Audit
 
